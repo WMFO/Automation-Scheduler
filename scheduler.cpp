@@ -15,7 +15,7 @@ vector<long int> songs;
 int fill_vector(vector<long int> &songs, mysqlpp::Connection& conn) {
 	mysqlpp::Query q = conn.query("select NUMBER from CART WHERE GROUP_NAME=\"MUSIC\" AND SCHED_CODES LIKE \"%S%\" AND FORCED_LENGTH < 600000");
 	mysqlpp::StoreQueryResult res = q.store();
-	for (int i = 0; i < res.num_rows(); i++) {
+	for (unsigned i = 0; i < res.num_rows(); i++) {
 		songs.push_back(res[i][0]);
 	}
 	return res.num_rows();
@@ -30,6 +30,8 @@ void output_cart(long int cart, int hour, int minute) {
 }
 
 int main(int argc, char *argv[]) {
+	(void) argc;
+	(void) argv;
 	mysqlpp::Connection conn;
 	setup_connection(conn);
 	vector<long int> songs;
