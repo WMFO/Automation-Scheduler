@@ -9,7 +9,7 @@ INSTALLDIR=/opt/wmfo/scheduler
 OWNER = root
 MOD = 700
 FILE = scheduler
-SCRIPT = generate_logs.sh
+SCRIPT = generate_log.sh
 CREDS = credentials.cpp
 CREDSMOD = 600
 
