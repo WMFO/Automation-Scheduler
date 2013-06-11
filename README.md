@@ -14,7 +14,9 @@ Logs can be viewed with `rdlogedit`.
 
 Rivendell's internal scheduler is O(n^2) in the number of songs in the library.
 By making simplifying assumptions about the uniformity of songs selected, this
-scheduler is O(n).
+scheduler is O(n). Third parties are encouraged to modify the sql statement in
+the .cpp file to sample songs according to their preferences. Ours selects
+songs flagged as CLEAN and excludes a few genres.
 
 The scheduler is run daily thanks to this entry in root's crontab:
 `0 15 * * * /opt/wmfo/scheduler/logs/generate_log.sh`
@@ -39,3 +41,6 @@ Add Makefile. - Max Goldstein
 
 ###12/20/12
 Change `generate_log.sh` to work with new `rdlogmanager` interface. Look for SAFE scheduler code. - Max Goldstein
+
+###6/10/13
+SQL query enhancements: exclude metal and similar (we use the `USER_DEFINED` field for genre), check for validity. - Max Goldstein

@@ -13,7 +13,7 @@ vector<long int> songs;
 
 //returns number of songs
 int fill_vector(vector<long int> &songs, mysqlpp::Connection& conn) {
-	mysqlpp::Query q = conn.query("select NUMBER from CART WHERE GROUP_NAME=\"MUSIC\" AND SCHED_CODES LIKE \"%SAFE%\" AND FORCED_LENGTH < 600000");
+	mysqlpp::Query q = conn.query("select NUMBER from CART WHERE GROUP_NAME=\"MUSIC\" AND SCHED_CODES LIKE \"%SAFE%\" AND FORCED_LENGTH < 600000 AND VALIDITY = 2 AND NOT USER_DEFINED LIKE \"%METAL%\" AND NOT USER_DEFINED LIKE \"%EMO%\" AND NOT USER_DEFINED LIKE \"%GRUNGE%\" AND NOT USER_DEFINED LIKE \"%DEATH%\" AND NOT USER_DEFINED LIKE \"%GRIND%\"");
 	mysqlpp::StoreQueryResult res = q.store();
 	for (unsigned i = 0; i < res.num_rows(); i++) {
 		songs.push_back(res[i][0]);
