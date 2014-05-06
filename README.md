@@ -44,3 +44,6 @@ Change `generate_log.sh` to work with new `rdlogmanager` interface. Look for SAF
 
 ###6/10/13
 SQL query enhancements: exclude metal and similar (we use the `USER_DEFINED` field for genre), check for validity. - Max Goldstein
+
+###5/6/14
+Abstract out restricting genres. - Max Goldstein

@@ -11,9 +11,17 @@ using namespace std;
 
 vector<long int> songs;
 
-//returns number of songs
+// populates songs and returns its length
 int fill_vector(vector<long int> &songs, mysqlpp::Connection& conn) {
-	mysqlpp::Query q = conn.query("select NUMBER from CART WHERE GROUP_NAME=\"MUSIC\" AND SCHED_CODES LIKE \"%SAFE%\" AND FORCED_LENGTH < 600000 AND VALIDITY = 2 AND NOT USER_DEFINED LIKE \"%METAL%\" AND NOT USER_DEFINED LIKE \"SCRE%MO\" AND NOT USER_DEFINED LIKE \"%DEATH%\" AND NOT USER_DEFINED LIKE \"%GRIND%\" AND NOT USER_DEFINED LIKE \"HORROR PUNK\"");
+	// add more bad genres here
+	const int bad_genre_len = 6;
+	const string bad_genre [bad_genre_len] = {"METAL", "SCRE%MO", "DEATH", "GRIND", "HORROR", "HARDCORE"};
+
+	string query = "SELECT NUMBER FROM CART WHERE GROUP_NAME=\"MUSIC\" AND SCHED_CODES LIKE \"%SAFE%\" AND FORCED_LENGTH < 600000 AND VALIDITY = 2";
+	for (int i = 0; i < bad_genre_len; i++){
+		query += " AND NOT USER_DEFINED LIKE \"%" + bad_genre[i] + "%\"";
+	}
+	mysqlpp::Query q = conn.query(query);
 	mysqlpp::StoreQueryResult res = q.store();
 	for (unsigned i = 0; i < res.num_rows(); i++) {
 		songs.push_back(res[i][0]);
