@@ -23,10 +23,12 @@ The scheduler is run daily thanks to this entry in root's crontab:
 
 **Combatibility note:** Somewhere between Rivendell 2.1.5 and 2.2.1, the
 interface of `rdlogmanager` was changed so that the argument to the `-d` flag
-is now n+1 days in the future. The current version works with 2.2.1.
+is now n+1 days in the future. The current version works with 2.2.1 and has
+been tested with 2.8.1.
 
 The provided Makefile builds and installs the scheduler. It also changes file
-ownership to lock down files with the mysql credentials.
+ownership to lock down files with the mysql credentials. To build, you'll need
+MySQL++: `sudo apt-get install "libmysql++-dev"`.
 
 Changelog
 ---------
