@@ -13,15 +13,8 @@ vector<long int> songs;
 
 // populates songs and returns its length
 int fill_vector(vector<long int> &songs, mysqlpp::Connection& conn) {
-	// add more bad genres here
-	const int bad_genre_len = 6;
-	const string bad_genre [bad_genre_len] = {"METAL", "SCRE%MO", "DEATH", "GRIND", "HORROR", "HARDCORE"};
-
-	string query = "SELECT NUMBER FROM CART WHERE GROUP_NAME=\"MUSIC\" AND SCHED_CODES LIKE \"%SAFE%\" AND FORCED_LENGTH < 600000 AND VALIDITY = 2";
-	for (int i = 0; i < bad_genre_len; i++){
-		query += " AND NOT USER_DEFINED LIKE \"%" + bad_genre[i] + "%\"";
-	}
-	mysqlpp::Query q = conn.query(query);
+	string md_query = "SELECT id FROM automation";
+	mysqlpp::Query q = conn.query(md_query);
 	mysqlpp::StoreQueryResult res = q.store();
 	for (unsigned i = 0; i < res.num_rows(); i++) {
 		songs.push_back(res[i][0]);
