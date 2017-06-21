@@ -15,18 +15,13 @@ CREDSMOD = 600
 
 .PHONY: all install 
 
-all: $(FILE)
-	@chown $(OWNER) $(CREDS)
-	@chmod $(CREDSMOD) $(CREDS)
 
 $(FILE): $(FILE).cpp $(CREDS)
 	@g++ *.cpp -lmysqlpp -o $@ -Wall -Wextra -Werror
-	@chown $(OWNER) $@
-	@chmod $(MOD) $@
 
 install: $(INSTALLDIR)/$(FILE)
 	@mkdir -p $(INSTALLDIR)/logs
-	@cp $(SCRIPT) $(INSTALLDIR)/logs
+	@cp $(SCRIPT) $(INSTALLDIR)
 
 $(INSTALLDIR)/$(FILE): $(FILE)
 	@mkdir -p $(INSTALLDIR)

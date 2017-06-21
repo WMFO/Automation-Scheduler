@@ -13,7 +13,7 @@ vector<long int> songs;
 
 // populates songs and returns its length
 int fill_vector(vector<long int> &songs, mysqlpp::Connection& conn) {
-	string md_query = "SELECT id FROM automation";
+	string md_query = "SELECT id FROM automation where weight != 1";
 	mysqlpp::Query q = conn.query(md_query);
 	mysqlpp::StoreQueryResult res = q.store();
 	for (unsigned i = 0; i < res.num_rows(); i++) {
